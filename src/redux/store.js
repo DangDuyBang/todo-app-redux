@@ -1,11 +1,15 @@
-import { legacy_createStore as createStore } from 'redux'
-import rootReducer from './reducer';
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { configureStore } from "@reduxjs/toolkit"
+import FiltersSlice from "../components/Filters/FiltersSlice";
+import TodosSlice from "../components/TodoList/TodosSlice";
 
-const composeEnhancers = composeWithDevTools();
-
-const store = createStore(rootReducer, composeEnhancers);
+const store = configureStore({ // nhận vào một object
+    // Không cần combine reducer
+    reducer: {
+        filters: FiltersSlice.reducer,
+        todoList: TodosSlice.reducer
+    }
+})
 
 export default store;
 
-// store khi sử dụng redux core
+// store khi sử dụng redux toolkit
