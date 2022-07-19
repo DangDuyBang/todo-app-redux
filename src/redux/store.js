@@ -7,3 +7,5 @@ const composeEnhancers = composeWithDevTools();
 const store = createStore(rootReducer, composeEnhancers);
 
 export default store;
+
+// store khi sử dụng redux core
