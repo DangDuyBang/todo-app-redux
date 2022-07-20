@@ -2,10 +2,24 @@ import { Typography, Divider } from 'antd';
 import './App.css';
 import TodoList from './components/TodoList';
 import Filters from './components/Filters';
+import { setupServer } from './fakeApis';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import { fetchTodos } from './components/TodoList/TodosSlice';
+
+if (process.env.NODE_ENV === 'development') {
+  setupServer();
+}
 
 const { Title } = Typography;
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodos)
+  }, [])
+
   return (
     <div
       style={{
@@ -29,3 +43,25 @@ function App() {
 }
 
 export default App;
+
+// Test fakeAPI
+
+// useEffect(() => {
+//   fetch('/api/todos', {
+//     method: 'POST',
+//     body: JSON.stringify({ id: '1', name: 'Learn React', completed: false, priority: "High" })
+//   }).then(() => {
+//     fetch('/api/todos')
+//       .then((res) => res.json())
+//       .then((res) => console.log(res));
+
+//     fetch('/api/updateTodo', {
+//       method: 'POST',
+//       body: JSON.stringify({ id: '1', name: 'Learn React JSNATIVE', completed: true, priority: "High" })
+//     }).then(() => {
+//       fetch('/api/todos')
+//         .then((res) => res.json())
+//         .then((res) => console.log(res));
+//     });
+//   });
+// }, [])
